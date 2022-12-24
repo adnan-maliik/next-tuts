@@ -10,18 +10,18 @@ const Layout = ({ children }) => {
           </Link>
         </NavItem>
         <NavItem>
-          <Link href="/events" passHref  legacyBehavior >
-            <NavLink  className="text-light">All Events</NavLink>
-          </Link>
-        </NavItem>
-        <NavItem>
           <Link href="/posts" passHref  legacyBehavior >
             <NavLink  className="text-light">Posts</NavLink>
           </Link>
         </NavItem>
+        <NavItem>
+          <Link href="/ssr" passHref  legacyBehavior >
+            <NavLink  className="text-light">SSR</NavLink>
+          </Link>
+        </NavItem>
       </Nav>
       <Container>
-        {children}
+        {children}  
       </Container>
     </div>
   );
