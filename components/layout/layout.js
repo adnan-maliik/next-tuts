@@ -6,17 +6,12 @@ const Layout = ({ children }) => {
       <Nav fill pills color="light" className="bg-dark py-3">
         <NavItem>
           <Link href="/" passHref  legacyBehavior >
-            <NavLink  className="text-light">Next Events</NavLink>
+            <NavLink  className="text-light">Featured Events</NavLink>
           </Link>
         </NavItem>
         <NavItem>
-          <Link href="/posts" passHref  legacyBehavior >
-            <NavLink  className="text-light">Posts</NavLink>
-          </Link>
-        </NavItem>
-        <NavItem>
-          <Link href="/ssr" passHref  legacyBehavior >
-            <NavLink  className="text-light">SSR</NavLink>
+          <Link href="/events" passHref  legacyBehavior >
+            <NavLink  className="text-light">Events</NavLink>
           </Link>
         </NavItem>
       </Nav>
