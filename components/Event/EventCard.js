@@ -23,7 +23,7 @@ const EventCard = ({title,image,location,date,id}) => {
             <div className="clearfix">
                 <Button color="primary" className="float-end" >
                         <Link href={{
-                            pathname:'events/[id]',
+                            pathname:'/events/[id]',
                             query:{
                                 id
                             }
