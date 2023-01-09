@@ -6,3 +6,7 @@ const TaskDetailPage = () => {
 }
 
 export default TaskDetailPage
+
+/**
+ * https://www.codeconcisely.com/posts/nextjs-multiple-layouts/
+ */

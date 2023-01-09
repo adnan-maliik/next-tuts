@@ -8,7 +8,7 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 
-const Task = ({ content, id ,time}) => {
+const Task = ({ content, edited ,time,deleted}) => {
   return (
     <Card
       style={{ maxWidth: "40rem" }}
@@ -25,10 +25,10 @@ const Task = ({ content, id ,time}) => {
               <DropdownItem>{time}</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
-          <Button size="sm">
+          <Button size="sm" onClick={edited} >
             <i className="fa fa-edit"></i>
           </Button>
-          <Button size="sm" color="danger">
+          <Button onClick={deleted} size="sm" color="danger">
             <i className="fa fa-trash"></i>
           </Button>
         </div>
