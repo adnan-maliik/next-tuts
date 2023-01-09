@@ -37,4 +37,5 @@ next-env.d.ts
 
 #firebase config files
 /lib/fireConfig.js
-/lib/
+/lib/firebase.js
+/lib/private-key.json
