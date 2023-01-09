@@ -1,44 +1,66 @@
-import Form from "../components/layout/Tasks/Form";
-import Task from "../components/layout/Tasks/task";
-import ErrorMsg from "../components/layout/Ui/ErrorMsg";
-
-export default function Home({hasError,error,tasks}) {
-  if(hasError) return <ErrorMsg message={error} />
-  return (
-    <div>
-      <h1 className="display-3 text-center fw-bold mt-3 text-primary">
-        NextJs + Firebase TODO App
-      </h1>
-      <Form/>
-      {tasks.map(task=>(
-        <Task
-        key={task.id}
-        content={task.content}
-        time={new Date(task.createdAt).toLocaleString()}
-        />
+import { useRouter } from "next/router";
+import ErrorMsg from "../components/layout/Ui/ErrorMsg"
+import From from "../components/Subs/From";
+export default function Home({ hasError, data }) {
+  const router=useRouter()
+  if (hasError || !data) return <ErrorMsg message={'Failed to found Data!'} />
+  const addHandler = (paylaod) => {
+    fetch('/api/sub', {
+      method: 'POST',
+      body: JSON.stringify(paylaod),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+    .then(data => {
+      if(data){
+        router.replace(router.asPath)
+      }
+    })
+}
+return (
+  <div>
+    <h1 className="display-5 text-center fw-bold mt-3 text-primary">
+      Subcribe to Our NewsLetter
+    </h1>
+    <From
+      addHanlder={addHandler}
+    />
+    <ul>
+      {data.map(subscriber => (
+        <li key={subscriber._id} className='lead text-uppercase'>
+          <h5>{subscriber.name}</h5>
+          <small>{subscriber.email}</small>
+        </li>
       ))}
-    </div>
-  );
+
+    </ul>
+  </div>
+);
 }
 // console.log('environment => ',process.env);
 
-export async function getServerSideProps(context) {
+
+export async function getServerSideProps() {
   try {
-    const hostUrl = context.req.headers.host
-    const response = await fetch('http://'+hostUrl+'/api/tasks/')
-    const tasks = await response.json()
-    if(!tasks) throw Error('No Tasks found!')
+    let result = await fetch('http://localhost:3000/api/sub')
+    let data = await result.json()
+    if (!data) {
+      return {
+        notFound: true
+      }
+    }
     return {
-      props:{
-        tasks
+      props: {
+        data
       }
     }
   } catch (error) {
     console.log(error.message);
     return {
-      props:{
-        hasError:true,
-        error:error.message
+      props: {
+        hasError: true,
+        message: error.message
       }
     }
   }
